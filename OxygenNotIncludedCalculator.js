@@ -195,6 +195,46 @@ var sumOfBuildingIOs = (givenBuildings) => {
     return {materialFlow: materialFlow,buildingList: buildingList};
 }
 
+var buildingUsesResource = (resource,isOutput) => {
+    buildingList = {};
+    Object.keys(buildings).forEach((buildingKey)=>{
+        if(buildings[buildingKey] && buildings[buildingKey].io[resource]){
+            if(isOutput){
+                if(buildings[buildingKey].io[resource] > 0){
+                    buildingList[buildingKey] = buildings[buildingKey];
+                }
+            } else {
+                if(buildings[buildingKey].io[resource] < 0){
+                    buildingList[buildingKey] = buildings[buildingKey];
+                }
+            }
+        }
+    })
+    return buildingList;
+}
+
 var geysersVentsVolcanoes = {
 
+}
+
+var recommendDefault = (givenBuildingsAndGeysers)=>{
+    var recommendations = {
+        excess: {},
+        deficit: {}
+    }
+    currentState = sumOfBuildingIOs(givenBuildingsAndGeysers);
+    // Add separate func to handle geysers or integrate into one func
+    if(currentState && currentState['materialFlow']){
+        Object.keys(currentState).forEach((material)=>{
+            if(currentState['materialFlow'][material] > 0){
+                recommendations.excess[material] = buildingUsesResource(material,false);
+                // populate  the above with  helpful suggestions
+            } else if (currentState['materialFlow'][material] < 0){
+                recommendations.deficit[material] = buildingUsesResource(material,true);
+                // populate  the above with  helpful suggestions
+            }
+            
+        });
+    }
+    return recommendations
 }
