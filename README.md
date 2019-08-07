@@ -1,10 +1,12 @@
 # Oxygen Not Included (ONI) Calculator 
 
-## Preliminary Scope - Stage 1 Started: 07/08/19
+### Started 07/08/19
+## Stage 1: Preliminary Scope & Buildings
 - All building material production & consumption rates stored in an object
 - Add a method to calculate the net inputs & outputs resulting from a given number of buildings
 
-## Scope - Stage 2             Started 07/08/19
+### Started 07/08/19
+## Stage 2: Geysers & Helper Functions
 - Add Geyser material production & consumption rates into an object
 - Add a net input/output summing method
 - Add a materials merging function for geysers and buildings
