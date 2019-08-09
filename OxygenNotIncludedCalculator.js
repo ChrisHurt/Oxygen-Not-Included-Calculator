@@ -1,6 +1,7 @@
 // Power Units: Watts
 // Material flow rates: g/s
-
+// Temperatures are in Celsius
+// Pressures are in Pa
 
 var buildings = {
     deodorizer: {
@@ -164,6 +165,30 @@ var buildings = {
     }
 }
 
+// Geysers, vents and volcanoes are an infinite but intermittent source of specific elements.
+// The intermittent nature comes because they have an activity cycle, and during the active
+// period of this cycle, they are then cycling between eruptions and dormancy in line with the
+// eruption cycle.
+var gesyerOutput = (activePeriod, activeInterval,eruptionPeriod,eruptionInterval,eruptionOutput) =>{
+    return (activePeriod/(activePeriod+activeInterval))*(eruptionPeriod/(eruptionPeriod+eruptionInterval))*eruptionOutput
+}
+var geysersVentsVolcanoes = {
+    coolSteamVent: {
+        element: steam,
+        temperature: 110,
+        maxPressure: 5000.00,
+    },
+    steamVent: {
+        element: steam,
+        temperature: 110,
+        maxPressure: 5000.00,
+    },
+    waterGeyser: {},
+    coolSlushGeyser: {}
+
+}
+
+
 buildingList = {
     carbonSkimmer: 3,
     waterSieve: 1,
@@ -211,10 +236,6 @@ var buildingUsesResource = (resource,isOutput) => {
         }
     })
     return buildingList;
-}
-
-var geysersVentsVolcanoes = {
-
 }
 
 var recommendDefault = (givenBuildingsAndGeysers)=>{
