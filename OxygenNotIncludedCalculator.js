@@ -1,7 +1,7 @@
 // Power Units: Watts
 // Material flow rates: g/s
 // Temperatures are in Celsius
-// Pressures are in Pa
+// Pressures are in 'kg', ONI  can be weird sometimes...
 
 var buildings = {
     deodorizer: {
@@ -165,6 +165,11 @@ var buildings = {
     }
 }
 
+// This only includes materials relevant for geyser calculations
+var phaseTransitions = {
+
+}
+
 // Geysers, vents and volcanoes are an infinite but intermittent source of specific elements.
 // The intermittent nature comes because they have an activity cycle, and during the active
 // period of this cycle, they are then cycling between eruptions and dormancy in line with the
@@ -174,18 +179,122 @@ var gesyerOutput = (activePeriod, activeInterval,eruptionPeriod,eruptionInterval
 }
 var geysersVentsVolcanoes = {
     coolSteamVent: {
-        element: steam,
-        temperature: 110,
-        maxPressure: 5000.00,
+        steam: {
+            temperature: 110,
+            maxPressure: 5.00
+        }
     },
     steamVent: {
-        element: steam,
-        temperature: 110,
-        maxPressure: 5000.00,
+        steam: {
+            temperature: 500,
+            maxPressure: 15.00
+        }
     },
-    waterGeyser: {},
-    coolSlushGeyser: {}
+    waterGeyser: {
+        water: {
+            temperature: 95,
+            maxPressure: 500.00
 
+        }
+    },
+    coolSlushGeyser: {
+        pollutedWater: {
+            temperature: -10,
+            maxPressure: 500.00
+        }
+    },
+    pollutedWaterVent: {
+        pollutedWater: {
+            temperature: -10,
+            maxPressure: 500.00,
+            other: ['foodpoisoning']
+        }
+    },
+    saltWaterVent: {
+        saltWater: {
+            temperature: -10,
+            maxPressure: 500.00
+        }
+    },
+    minorVolcano: {
+        magma: {
+            temperature: 1726.85,
+            maxPressure: 150.00
+        }
+    },
+    volcano: {
+        magma: {
+            temperature: 1726.85,
+            maxPressure: 150.00
+        }
+    },
+    carbonDioxideGeyser: {
+        carbonDioxide: {
+            temperature: -55.15,
+            maxPressure: 50.00
+        }
+    },
+    carbonDioxideVent: {
+        carbonDioxide: {
+            temperature: 500,
+            maxPressure: 5.00
+        }
+    },
+    hydrogenVent: {
+        hydrogen: {
+            temperature: 500,
+            maxPressure: 5.00
+        }
+    },
+    hotPollutedOxygenVent:  {
+        pollutedOxygen: {
+            temperature: 500,
+            maxPressure: 5.00
+        }
+    },
+    infectiousPollutedOxygenVent:  {
+        pollutedOxygen: {
+            temperature: 60,
+            maxPressure: 5.00,
+            other: ['slimelung']
+        }
+    },
+    chlorineGasVent: {
+        chlorine: {
+            temperature: 60,
+            maxPressure: 5.00
+        }
+    },
+    naturalGasGeyser: {
+        naturalGas: {
+            temperature: 150,
+            maxPressure: 5.00
+        }
+    },
+    copperVolcano: {
+        liquidCopper: {
+            temperature: 2226.85,
+            maxPressure: 150.00
+        }
+    },
+    ironVolcano: {
+        liquidIron: {
+            temperature: 2526.85,
+            maxPressure: 150.00
+        }
+    },
+    goldVolcano: {
+        liquidGold: {
+            temperature: 2626.85,
+            maxPressure: 150.00
+        }
+    },
+    leakyOilFissure: {
+        crudeOil: {
+            temperature: 326.85,
+            maxPressure: 50.00
+        }
+    }
 }
 
 
